@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Successful</title>
+</head>
+<body>
+	<h1>Registration Successful</h1>
+	<p>Thank you for registering, <?php echo $_COOKIE['name']; ?>!</p>
+	<p>Here are the registered users:</p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Profile Picture</th>
+		</tr>
+		<?php
+			$file = fopen('users.csv', 'r');
+			while (($data = fgetcsv($file)) !== FALSE) {
+				echo '<tr>';
+				echo '<td>' . $data[0] . '</td>';
+				echo '<td>' . $data[1] . '</td>';
+				echo '<td><img src="uploads/' . $data[2] . '" width="100"></td>';
+				echo '</tr>';
+			}
+			fclose($file);
+		?>
+	</table>
+</body>
+</html>
